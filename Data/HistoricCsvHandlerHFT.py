@@ -1,19 +1,29 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# hft_data.py
+
+from __future__ import print_function
+
+from abc import ABCMeta, abstractmethod
 import datetime
-import os
+import os, os.path
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from Data.IDataHandler import IDataHandler
 from Events.MarketEvent import MarketIEvent
+from Data.IDataHandler import IDataHandler
 
 
-class HistoricCSVDataHandler(IDataHandler):
+class HistoricCSVDataHandlerHFT(IDataHandler):
     """
-    HistoricCSVDataHandler is designed to read CSV files for
+    HistoricCSVDataHandlerHFT is designed to read CSV files for
     each requested symbol from disk and provide an interface
     to obtain the "latest" bar in a manner identical to a live
     trading interface.
+
+    This particular class uses DTN IQFeed as its data source.
     """
 
     def __init__(self, events, csv_dir, symbol_list):
@@ -51,13 +61,14 @@ class HistoricCSVDataHandler(IDataHandler):
         comb_index = None
         for s in self.symbol_list:
             # Load the CSV file with no header information, indexed on date
-            self.symbol_data[s] = pd.read_csv(
+            self.symbol_data[s] = pd.io.parsers.read_csv(
                 os.path.join(self.csv_dir, '%s.csv' % s),
                 header=0, index_col=0, parse_dates=True,
                 names=[
-                    'Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'
+                    'datetime', 'open', 'low',
+                    'high', 'close', 'volume', 'oi'
                 ]
-            )
+            ).sort()
 
             # Combine the index to pad forward values
             if comb_index is None:
@@ -72,7 +83,7 @@ class HistoricCSVDataHandler(IDataHandler):
             self.symbol_data[s] = self.symbol_data[s].reindex(
                 index=comb_index, method='pad'
             )
-            self.symbol_data[s]["returns"] = self.symbol_data[s]["Adj Close"].pct_change()
+            self.symbol_data[s]["returns"] = self.symbol_data[s]["close"].pct_change()
             self.symbol_data[s] = self.symbol_data[s].iterrows()
 
     def _get_new_bar(self, symbol):

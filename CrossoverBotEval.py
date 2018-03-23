@@ -11,7 +11,7 @@ client = API(access_token=OANDA_ACCESS_TOKEN)
 instr = "EUR_USD"
 
 params = {
-    "granularity": "M1",
+    "granularity": "D1",
     "from": "2012-01-01T00:00:00Z",
     "to": "2017-06-30T00:00:00Z"
 }

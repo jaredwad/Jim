@@ -1,4 +1,4 @@
-from Events.SignalEvent import SignalIEvent
+from Events.SignalEvent import SignalEvent
 from Strategies.IStrategy import IStrategy
 
 
@@ -52,6 +52,6 @@ class BuyAndHoldStrategy(IStrategy):
                 if bars is not None and bars != []:
                     if not self.bought[s]:
                         # (Symbol, Datetime, Type = LONG, SHORT or EXIT)
-                        signal = SignalIEvent(bars[0][0], bars[0][1], 'LONG')
+                        signal = SignalEvent(bars[0][0], bars[0][1], 'LONG')
                         self.events.put(signal)
                         self.bought[s] = True

@@ -1,6 +1,6 @@
 import datetime
 
-from Events.FillEvent import FillIEvent
+from Events.FillEvent import FillEvent
 from ExecutionHandlers.IExecutionHandler import IExecutionHandler
 
 
@@ -15,16 +15,14 @@ class SimulatedExecutionHandler(IExecutionHandler):
     handler.
     """
 
-    def __init__(self, bars, events):
+    def __init__(self, events):
         """
         Initialises the handler, setting the event queues
         up internally.
 
         Parameters:
-        bars - The DataHandler
         events - The Queue of Event objects.
         """
-        self.bars = bars
         self.events = events
 
     def execute_order(self, event):
@@ -36,8 +34,10 @@ class SimulatedExecutionHandler(IExecutionHandler):
         event - Contains an Event object with order information.
         """
         if event.type == 'ORDER':
-            cost = self.bars.get_latest_bars(event.symbol)[0][5]
+            print("Bought {0} shares of {1}".format(event.quantity, event.symbol))
 
-            fill_event = FillIEvent(datetime.datetime.utcnow(), event.symbol,
-                                   'ARCA', event.quantity, event.direction, cost)
+            fill_event = FillEvent(
+                datetime.datetime.utcnow(), event.symbol,
+                'ARCA', event.quantity, event.direction, None
+            )
             self.events.put(fill_event)

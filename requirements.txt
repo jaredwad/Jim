@@ -1,5 +1,14 @@
+numpy
+matplotlib
+statsmodels
+quandl
+requests
+mysqlclient
+beautifulsoup4
 v20
 pandas
 sklearn
 scipy
 pyyaml
+pandas_datareader
+ib

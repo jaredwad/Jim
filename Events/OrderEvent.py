@@ -1,7 +1,7 @@
 from Events.IEvent import IEvent
 
 
-class OrderIEvent(IEvent):
+class OrderEvent(IEvent):
     """
     Handles the event of sending an Order to an execution system.
     The order contains a symbol (e.g. GOOG), a type (market or limit),
@@ -15,13 +15,15 @@ class OrderIEvent(IEvent):
         a quantity (integral) and its direction ('BUY' or
         'SELL').
 
+        TODO: Must handle error checking here to obtain
+        rational orders (i.e. no negative quantities etc).
+
         Parameters:
         symbol - The instrument to trade.
         order_type - 'MKT' or 'LMT' for Market or Limit.
         quantity - Non-negative integer for quantity.
         direction - 'BUY' or 'SELL' for long or short.
         """
-
         self.type = 'ORDER'
         self.symbol = symbol
         self.order_type = order_type

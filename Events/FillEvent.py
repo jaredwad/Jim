@@ -1,12 +1,16 @@
 from Events.IEvent import IEvent
 
 
-class FillIEvent(IEvent):
+class FillEvent(IEvent):
     """
     Encapsulates the notion of a Filled Order, as returned
     from a brokerage. Stores the quantity of an instrument
     actually filled and at what price. In addition, stores
     the commission of the trade from the brokerage.
+
+    TODO: Currently does not support filling positions at
+    different prices. This will be simulated by averaging
+    the cost.
     """
 
     def __init__(self, timeindex, symbol, exchange, quantity,
@@ -29,7 +33,6 @@ class FillIEvent(IEvent):
         fill_cost - The holdings value in dollars.
         commission - An optional commission sent from IB.
         """
-
         self.type = 'FILL'
         self.timeindex = timeindex
         self.symbol = symbol
@@ -59,5 +62,4 @@ class FillIEvent(IEvent):
             full_cost = max(1.3, 0.013 * self.quantity)
         else:  # Greater than 500
             full_cost = max(1.3, 0.008 * self.quantity)
-        full_cost = min(full_cost, 0.5 / 100.0 * self.quantity * self.fill_cost)
         return full_cost
