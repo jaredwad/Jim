@@ -1,8 +1,8 @@
 import datetime
 import numpy as np
 
-from Data.HistoricCsvDataHandler import HistoricCSVDataHandler
-from Data.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT
+from DataHandlers.HistoricCsvDataHandler import HistoricCSVDataHandler
+from DataHandlers.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT
 from Events.SignalEvent import SignalEvent
 from ExecutionHandlers.SimulatedExicutionHandler import SimulatedExecutionHandler
 from Portfolios.Portfolio import Portfolio

@@ -2,13 +2,12 @@ import json
 import threading
 from copy import deepcopy
 
-from Data.HistoricOandaDataHandler import HistoricOandaDataHandler
-from Data.OandaDataHandler import OandaDataHandler
+from DataHandlers.HistoricOandaDataHandler import HistoricOandaDataHandler
 from Events.OrderEvent import OrderEvent
 from Events.SignalEvent import SignalEvent
-from Events.rabbitmq_publisher import Publisher
-from Events.rabbitmq_subscriber import Subscriber
-from Position.Position import Position
+from Models.rabbitmq_publisher import Publisher
+from Models.rabbitmq_subscriber import Subscriber
+from Models.Position import Position
 
 
 class Portfolio(object):

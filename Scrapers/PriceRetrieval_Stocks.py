@@ -119,7 +119,7 @@ def insert_daily_data_into_db(
 
 
 if __name__ == "__main__":
-    # This ignores the warnings regarding Data Truncation
+    # This ignores the warnings regarding DataHandlers Truncation
     # from the Quandl precision to Decimal(19,4) datatypes
     warnings.filterwarnings('ignore')
 

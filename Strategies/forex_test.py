@@ -1,9 +1,8 @@
 import json
 
 from Events.SignalEvent import SignalEvent
-from Events.TickEvent import TickEvent
-from Events.rabbitmq_publisher import Publisher
-from Events.rabbitmq_subscriber import Subscriber
+from Models.rabbitmq_publisher import Publisher
+from Models.rabbitmq_subscriber import Subscriber
 
 
 class TestStrategy(object):

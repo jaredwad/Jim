@@ -18,8 +18,8 @@ import datetime
 from Strategies.IStrategy import IStrategy
 from Events.SignalEvent import SignalEvent
 from Test.Backtest import Backtest
-from Data.HistoricCsvDataHandler import HistoricCSVDataHandler
-from Data.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT
+from DataHandlers.HistoricCsvDataHandler import HistoricCSVDataHandler
+from DataHandlers.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT
 from ExecutionHandlers.SimulatedExicutionHandler import SimulatedExecutionHandler
 from Portfolios.Portfolio import Portfolio
 from MachineLearning.first_look import create_lagged_series

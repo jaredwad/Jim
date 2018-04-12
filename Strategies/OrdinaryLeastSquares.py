@@ -14,12 +14,12 @@ import statsmodels.api as sm
 from Strategies.IStrategy import IStrategy
 from Events.SignalEvent import SignalEvent
 from Test.Backtest import Backtest
-from Data.HistoricCsvDataHandler import HistoricCSVDataHandler
+from DataHandlers.HistoricCsvDataHandler import HistoricCSVDataHandler
 from ExecutionHandlers.SimulatedExicutionHandler import SimulatedExecutionHandler
 from Portfolios.Portfolio import Portfolio
 
 #from hft_data import HistoricCSVDataHandlerHFT as HFTDataHandler
-from Data.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT as HFTDataHandler
+from DataHandlers.HistoricGoogleFinanceHandlerHFT import HistoricGoogleFinanceDataHandlerHFT as HFTDataHandler
 
 
 class IntradayOLSMRStrategy(IStrategy):
