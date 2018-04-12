@@ -1,4 +1,4 @@
-from Events.rabbitmq_subscriber import Subscriber
+from Models.rabbitmq_subscriber import Subscriber
 
 
 def callback(ch, method, properties, body):
