@@ -5,6 +5,7 @@ from oandapyV20 import API
 import settings
 from DataHandlers.IDataHandler import IDataHandler
 from Events.CandleEvent import CandleEvent
+from Models.Duration import Duration
 from Models.rabbitmq_publisher import Publisher
 from time import sleep
 
@@ -49,6 +50,7 @@ class HistoricOandaDataHandler(IDataHandler):
             try:
                 tick = CandleEvent(self.instr
                                    , ctime
+                                   , Duration.DAY
                                    , float(candle['mid']['o'])
                                    , float(candle['mid']['h'])
                                    , float(candle['mid']['l'])
