@@ -1,8 +1,8 @@
 import v20
 import settings
-from Data.IDataHandler import IDataHandler
+from DataHandlers.IDataHandler import IDataHandler
 from Events.TickEvent import TickEvent
-from Events.rabbitmq_publisher import Publisher
+from Models.rabbitmq_publisher import Publisher
 
 
 class OandaDataHandler(IDataHandler):

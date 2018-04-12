@@ -1,13 +1,11 @@
-import json
 from datetime import datetime, timedelta
 
-import v20
 from oandapyV20.contrib.factories import InstrumentsCandlesFactory
 from oandapyV20 import API
 import settings
-from Data.IDataHandler import IDataHandler
+from DataHandlers.IDataHandler import IDataHandler
 from Events.CandleEvent import CandleEvent
-from Events.rabbitmq_publisher import Publisher
+from Models.rabbitmq_publisher import Publisher
 from time import sleep
 
 
