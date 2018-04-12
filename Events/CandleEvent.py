@@ -6,8 +6,8 @@ from Models.Duration import Duration
 
 
 class CandleEvent(IEvent):
-    def __init__(self, instrument, time, open, high, low, close, volume):
-        self.type = 'TICK'
+    def __init__(self, instrument, time, duration, open, high, low, close, volume):
+        self.type = 'CANDLE'
         self.instrument = instrument
         self.time = time
         self.duration = duration
