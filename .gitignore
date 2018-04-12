@@ -6,3 +6,5 @@
 StockData/
 ForexData/
 settings.py
+
+*.pyc
