@@ -1,8 +1,0 @@
-FROM python:3
-
-ADD temp_consume_tick.py /temp_consume_tick.py
-ADD requirements.txt /requirements.txt
-
-RUN pip3 install -r requirements.txt
-
-CMD [ "python", "./temp_consume_tick.py" ]
