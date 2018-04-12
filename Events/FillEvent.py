@@ -1,3 +1,5 @@
+import json
+from datetime import datetime
 from Events.IEvent import IEvent
 
 
@@ -63,3 +65,12 @@ class FillEvent(IEvent):
         else:  # Greater than 500
             full_cost = max(1.3, 0.008 * self.quantity)
         return full_cost
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__ if not isinstance(o, datetime) else str(o)
+                          , sort_keys=True, )
+
+    @staticmethod
+    def from_json(data):
+        return FillEvent(data['timeindex'], data['symbol'], data['exchange'], data['quantity'], data['direction']
+                         , data['fill_cost'], data['commission'])

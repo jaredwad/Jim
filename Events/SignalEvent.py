@@ -1,3 +1,5 @@
+import json
+
 from Events.IEvent import IEvent
 
 
@@ -7,21 +9,34 @@ class SignalEvent(IEvent):
     This is received by a Portfolio object and acted upon.
     """
 
-    def __init__(self, strategy_id, symbol, datetime, signal_type, strength):
-        """
-        Initialises the SignalEvent.
-
-        Parameters:
-        strategy_id - The unique ID of the strategy sending the signal.
-        symbol - The ticker symbol, e.g. 'GOOG'.
-        datetime - The timestamp at which the signal was generated.
-        signal_type - 'LONG' or 'SHORT'.
-        strength - An adjustment factor "suggestion" used to scale
-            quantity at the portfolio level. Useful for pairs strategies.
-        """
-        self.strategy_id = strategy_id
+    def __init__(self, instrument, order_type, side):
         self.type = 'SIGNAL'
-        self.symbol = symbol
-        self.datetime = datetime
-        self.signal_type = signal_type
-        self.strength = strength
+        self.instrument = instrument
+        self.order_type = order_type
+        self.side = side
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True)
+
+    @staticmethod
+    def from_json(data):
+        return SignalEvent(data['instrument'], data['order_type'], data['side'])
+
+    # def __init__(self, strategy_id, symbol, datetime, signal_type, strength):
+    #     """
+    #     Initialises the SignalEvent.
+    #
+    #     Parameters:
+    #     strategy_id - The unique ID of the strategy sending the signal.
+    #     symbol - The ticker symbol, e.g. 'GOOG'.
+    #     datetime - The timestamp at which the signal was generated.
+    #     signal_type - 'LONG' or 'SHORT'.
+    #     strength - An adjustment factor "suggestion" used to scale
+    #         quantity at the portfolio level. Useful for pairs strategies.
+    #     """
+    #     self.strategy_id = strategy_id
+    #     self.type = 'SIGNAL'
+    #     self.symbol = symbol # instrument
+    #     self.datetime = datetime
+    #     self.signal_type = signal_type # side
+    #     self.strength = strength
