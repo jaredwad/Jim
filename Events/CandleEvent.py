@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from Events.IEvent import IEvent
 from Models.Candle import Candle
@@ -21,9 +22,18 @@ class CandleEvent(IEvent):
         return self.candle.close
 
     def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__ if not isinstance(o, Duration) else o.name, sort_keys=True)
+        def stuff_to_string(data):
+            if isinstance(data, Duration):
+                return data.name
+            elif isinstance(data, datetime):
+                return data.strftime("%Y-%m-%dT%H:%M:%S")
+            else:
+                return data.__dict__
+
+        return json.dumps(self, default=stuff_to_string, sort_keys=True)
 
     @staticmethod
     def from_json(tick):
-        return CandleEvent(tick['instrument'], tick['time'], tick['duration'], tick['candle']['open'], tick['candle']['high']
-                           , tick['candle']['low'] , tick['candle']['close'], tick['volume'])
+        return CandleEvent(tick['instrument'], datetime.strptime(tick['time'], "%Y-%m-%dT%H:%M:%S"), tick['duration']
+                           , tick['candle']['open'], tick['candle']['high'], tick['candle']['low']
+                           , tick['candle']['close'], tick['volume'])
